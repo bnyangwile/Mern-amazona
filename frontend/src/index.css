@@ -11,9 +11,31 @@ header {
   background-color: #404040; /* homepage navbar background color */
   padding: 1rem; /* 1rem */
 }
-
 header a {
   color: #ffffff; /* hexadecimal color system*/
   font-weight: bold;
   text-decoration: none; /* removing underline on uza link */
+}
+
+main {
+  padding: 1rem;
+}
+.products {
+  display: flex; /* put item image next to each other */
+  flex-wrap: wrap; /* to make image and price etc responsive */
+  justify-content: center;
+}
+
+.product {
+  border: 1px #404040 solid; /* set border to 1px dark color solid */
+  margin: 1rem;
+}
+
+.product img {
+  width: 100%;
+  max-width: 400px; /* you can use this to change the image size on the screen */
+}
+
+.product-info {
+  padding: 1rem;
 }
