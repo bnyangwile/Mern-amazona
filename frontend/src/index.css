@@ -6,19 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-header {
-  background-color: #404040; /* homepage navbar background color */
-  padding: 1rem; /* 1rem */
+.site-container {
+  min-height: 100vh; /* vh means Viewport height */
 }
-header a {
-  color: #ffffff; /* hexadecimal color system*/
-  font-weight: bold;
-  text-decoration: none; /* removing underline on uza link */
-}
-
 main {
-  padding: 1rem;
+  flex: 1; /* flex to 1 to occupy a space between the header and the footer */
 }
 .products {
   display: flex; /* put item image next to each other */
