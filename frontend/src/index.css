@@ -12,10 +12,17 @@ body {
 main {
   flex: 1; /* flex to 1 to occupy a space between the header and the footer */
 }
+.btn-primary {
+  background-color: #f0c040; /* color for the add to cart button */
+  color: #000000; /* text on add to card button */
+}
 .products {
   display: flex; /* put item image next to each other */
   flex-wrap: wrap; /* to make image and price etc responsive */
   justify-content: center;
+}
+.rating span {
+  color: #ffc000; /* color for the stars on reviews */
 }
 
 .product {
