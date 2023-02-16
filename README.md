@@ -1,4 +1,3 @@
-12. Create Product and Rating component
-1. Creat Rating component
-1. Create Product component
-1. Use Rating component in Product component
+14. Create Product Details Screen
+1. fetch product from Screen
+1. create 3 columns for image, info and action

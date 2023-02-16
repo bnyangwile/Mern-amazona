@@ -34,7 +34,9 @@ main {
   width: 100%;
   max-width: 400px; /* you can use this to change the image size on the screen */
 }
-
 .product-info {
   padding: 1rem;
+}
+.img-large {
+  max-width: 100%;
 }
