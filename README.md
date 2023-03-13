@@ -29,3 +29,10 @@
     1. create signin api
     2. npm install jsonwebtoken
     3. define generate Token
+25. complete Signin Screen
+    1. npm i react-toastify to show error message
+    2. in App.js, we imported ToastContainer and toastify.css
+    3. use the userInfo and react context
+    4. signoutHandler
+    5. in Store.js, read userInfo from from localstorage and 2 new action in the reducer. USER_SIGNIN and USER_SIGNOUT
+    6. Most work was signin screen to get user email and password using submitHandler to pass through signin API. if data is coorect we save to localstorage and redirect user to Redirect URL
