@@ -3,8 +3,8 @@ import { useContext, useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Rating from "../components/Rating";
@@ -37,7 +37,6 @@ function ProductScreen() {
     loading: true,
     error: "",
   });
-
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -59,6 +58,7 @@ function ProductScreen() {
     const { data } = await axios.get(`/api/products/${product._id}`);
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
+      return;
     }
     ctxDispatch({
       type: "CART_ADD_ITEM",
@@ -66,7 +66,6 @@ function ProductScreen() {
     });
     navigate("/cart");
   };
-
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -95,7 +94,7 @@ function ProductScreen() {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item>Price : CDF{product.price}</ListGroup.Item>
+            <ListGroup.Item>Pirce : ${product.price}</ListGroup.Item>
             <ListGroup.Item>
               Description:
               <p>{product.description}</p>
@@ -109,7 +108,7 @@ function ProductScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Price:</Col>
-                    <Col>CDF{product.price}</Col>
+                    <Col>${product.price}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -124,11 +123,12 @@ function ProductScreen() {
                     </Col>
                   </Row>
                 </ListGroup.Item>
+
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className='d-grid'>
                       <Button onClick={addToCartHandler} variant='primary'>
-                        Add to cart
+                        Add to Cart
                       </Button>
                     </div>
                   </ListGroup.Item>
@@ -141,5 +141,4 @@ function ProductScreen() {
     </div>
   );
 }
-
 export default ProductScreen;
