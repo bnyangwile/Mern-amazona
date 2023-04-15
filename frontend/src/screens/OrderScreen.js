@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
@@ -15,7 +16,7 @@ function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
       return { ...state, loading: true, error: "" };
-    case "FETCH_SUCCES":
+    case "FETCH_SUCCESS":
       return { ...state, loading: false, order: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
@@ -24,7 +25,7 @@ function reducer(state, action) {
       return state;
   }
 }
-function OrderScreen() {
+export default function OrderScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
@@ -45,11 +46,12 @@ function OrderScreen() {
         const { data } = await axios.get(`/api/orders/${orderId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
-        dispatch({ type: "FETCH_SUCCES", payload: data });
+        dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
+
     if (!userInfo) {
       return navigate("/login"); //return navigate("/signin");
     }
@@ -74,7 +76,7 @@ function OrderScreen() {
               <Card.Title>Shipping</Card.Title>
               <Card.Text>
                 <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                <strong>Address:</strong> {order.shippingAddress.address},
+                <strong>Address: </strong> {order.shippingAddress.address},
                 {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                 ,{order.shippingAddress.country}
               </Card.Text>
@@ -102,6 +104,7 @@ function OrderScreen() {
               )}
             </Card.Body>
           </Card>
+
           <Card className='mb-3'>
             <Card.Body>
               <Card.Title>Items</Card.Title>
@@ -109,14 +112,14 @@ function OrderScreen() {
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                     <Row className='align-items-center'>
-                      <col md={6}>
+                      <Col md={6}>
                         <img
                           src={item.image}
                           alt={item.name}
                           className='img-fluid rounded img-thumbnail'
                         ></img>{" "}
                         <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                      </col>
+                      </Col>
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
@@ -136,7 +139,7 @@ function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>{" "}
+                    <Col>${order.itemsPrice.toFixed(2)}</Col>
                     {/*<Col>${Number(order.itemsPrice).toFixed(2)}</Col>*/}
                   </Row>
                 </ListGroup.Item>
@@ -155,7 +158,7 @@ function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong>Order Total</strong>
+                      <strong> Order Total</strong>
                     </Col>
                     <Col>
                       <strong>${order.totalPrice.toFixed(2)}</strong>
@@ -171,4 +174,4 @@ function OrderScreen() {
   );
 }
 
-export default OrderScreen;
+//export default OrderScreen;
